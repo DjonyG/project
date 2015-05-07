@@ -44,10 +44,9 @@ $this->breadcrumbs=array(
 		<?php echo $form->label($model,'rememberMe'); ?>
 		<?php echo $form->error($model,'rememberMe'); ?>
 	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
+    
+    <?php $this->widget(
+        'booster.widgets.TbButton',
+        ['buttonType' => TbButton::BUTTON_SUBMIT, 'context' => 'primary', 'label' => 'Submit', 'htmlOptions' => ['style' => 'background-color:#a4ae39;']]); ?>
+    <?php $this->endWidget(); ?>
 </div><!-- form -->
