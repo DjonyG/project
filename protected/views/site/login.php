@@ -1,52 +1,41 @@
 <?php
 /* @var $this SiteController */
 /* @var $model LoginForm */
-/* @var $form CActiveForm  */
-
-$this->pageTitle=Yii::app()->name . ' - Login';
-$this->breadcrumbs=array(
-	'Login',
-);
+/* @var $form TbActiveForm */
 ?>
 
-<h1>Login</h1>
+<h3>
+    <span class="glyphicon glyphicon-log-in"></span>
+    User Login
+</h3>
 
-<p>Please fill out the following form with your login credentials:</p>
+    <div class="panel-body">
+        <?php $form = $this->beginWidget('TbActiveForm', [
+            'id' => 'sign-in-form',
+            'enableAjaxValidation' => false,
+            'type' => 'horizontal',
+            'htmlOptions' => ['class' => 'col-sm-6'],
+            'showErrors' => false,
+        ]); ?>
 
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'login-form',
-	'enableClientValidation'=>true,
-	'clientOptions'=>array(
-		'validateOnSubmit'=>true,
-	),
-)); ?>
+        <?php echo $form->errorSummary($model); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+        <?php echo $form->textFieldGroup($model, 'username'); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
+        <?php echo $form->passwordFieldGroup($model, 'password'); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
-		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-		</p>
-	</div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <?php echo $form->checkBox($model, 'rememberMe'); ?>
+                <?php echo $form->label($model, 'rememberMe'); ?>
 
-	<div class="row rememberMe">
-		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
-	</div>
-    
-    <?php $this->widget(
-        'booster.widgets.TbButton',
-        ['buttonType' => TbButton::BUTTON_SUBMIT, 'context' => 'primary', 'label' => 'Submit', 'htmlOptions' => ['style' => 'background-color:#a4ae39;']]); ?>
-    <?php $this->endWidget(); ?>
-</div><!-- form -->
+                <br>
+                <?php $this->widget(
+                    'booster.widgets.TbButton',
+                    ['buttonType' => TbButton::BUTTON_SUBMIT, 'context' => 'primary', 'label' => 'Login']); ?>
+                <?php $this->endWidget(); ?>
+            </div>
+        </div>
+    </div>
+
+
