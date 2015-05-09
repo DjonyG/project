@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Project',
+	'name'=>'Знакомства',
     'language'=>'ru',
 
 	// preloading 'log' component
@@ -82,8 +82,11 @@ return array(
             'fontAwesomeCss' => true,
             'responsiveCss' => true,
         ],
+        'assetManager'=>[
+            'class'=>'AssetManager',
+        ],
 
-	),
+    ),
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
