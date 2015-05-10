@@ -9,8 +9,10 @@
     Вход на сайт
 </h3>
 
+<div class="panel panel-default" >
     <div class="panel-body">
         <?php $this->renderPartial('//_forms/login', array('model'=>$model)); ?>
     </div>
+</div>
 
 

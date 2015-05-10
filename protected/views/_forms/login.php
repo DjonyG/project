@@ -8,6 +8,7 @@ $form = $this->beginWidget('TbActiveForm', [
     'id' => 'login-form',
     'enableAjaxValidation' => false,
     'htmlOptions' => ['class' => 'col-sm-5'],
+    'showErrors' => false,
 ]); ?>
 
 <?php echo $form->errorSummary($model); ?>

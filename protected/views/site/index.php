@@ -3,11 +3,37 @@
 
 $this->pageTitle=Yii::app()->name;
 ?>
+<?php
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+if (Yii::app()->user->isGuest){
 
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
+$this->widget(
+    'booster.widgets.TbCarousel',
+    array(
+        'items' => array(
+            array(
+                'image' => 'images/first-placeholder1100x530.gif',
+                'label' => 'First Thumbnail label',
+                'caption' => 'First Caption.'
+            ),
+            array(
+                'image' => 'images/second-placeholder1100x530.gif',
+                'label' => 'Second Thumbnail label',
+                'caption' => 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'
+            ),
+            array(
+                'image' => 'images/third-placeholder1100x530.gif',
+                'label' => 'Third Thumbnail label',
+                'caption' => 'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'
+            ),
+        ),
+    )
+);
+}
+else{
+
+
+}
+?>
+
 
