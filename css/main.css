@@ -1,16 +1,24 @@
+@font-face
+{
+    font-family: Cuprum;
+    src: url(fonts/Cuprum-Regular.ttf);
+}
+
 body
 {
 	margin: 0;
 	padding: 0;
     color: #333333;
-    font-family: Tahoma, sans-serif;
+    font-family: "Cuprum",sans-serif;
+    font-size: 18px;
 	background: #EFEFEF;
+    height:100%;
 }
 
 #page
 {
 	background: white;
-    border-radius: 5px;
+    max-width: 960px;
 }
 
 #header
@@ -33,7 +41,7 @@ body
 #footer
 {
 	padding: 10px;
-	margin: 10px 20px;
+	margin: 10px 35px;
 	font-size: 0.8em;
 	text-align: center;
 	border-top: 1px solid #C9E0ED;
@@ -149,6 +157,11 @@ div.search-form
 	padding: 10px;
 	margin: 10px 0;
 	background: #eee;
+}
+
+label
+{
+    font-size: 16px;
 }
 
 .portlet

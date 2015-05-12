@@ -42,8 +42,8 @@
                     'type' => 'inverse',
                     'brand' => CHtml::tag('div', ['class' => 'logo-head'], CHtml::encode(Yii::app()->name)),
                     'brandUrl' => '#',
-                    'brandOptions' => array('style' => 'width:auto;margin-left: 10px;'),
-//                    'htmlOptions' => array('style' => 'margin: 0'),
+                    'brandOptions' => array('style' => 'margin-left: 10px;'),
+                    'htmlOptions' => array('style' => 'border-radius: 0;'),
                     'collapse' => true, // requires bootstrap-responsive.css
                     'fixed' => false,
                     'fluid' => true,
