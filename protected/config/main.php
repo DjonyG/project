@@ -5,93 +5,98 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
-return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Знакомства',
-    'language'=>'ru',
+return [
+    'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
+    'name' => 'Знакомства',
+    'language' => 'ru',
 
-	// preloading 'log' component
+    // preloading 'log' component
     'preload' => ['log', 'booster'],
 
-	// autoloading model and component classes
-	'import'=>array(
-		'application.models.*',
-		'application.components.*',
+    // autoloading model and component classes
+    'import' => [
+        'application.models.*',
+        'application.components.*',
         'application.extensions.YiiBooster.src.widgets.*',
-	),
+    ],
 
-	'modules'=>array(
-		// uncomment the following to enable the Gii tool
+    'modules' => [
+        // uncomment the following to enable the Gii tool
 
-		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
-			'password'=>'1234',
-			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','::1'),
-		),
+        'gii' => [
+            'class' => 'system.gii.GiiModule',
+            'password' => '1234',
+            // If removed, Gii defaults to localhost only. Edit carefully to taste.
+            'ipFilters' => ['127.0.0.1', '::1'],
+        ],
 
-	),
+    ],
 
-	// application components
-	'components'=>array(
+    // application components
+    'components' => [
 
-		'user'=>array(
-			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
-		),
+        'user' => [
+            // enable cookie-based authentication
+            'class' => 'WebUser',
+            'allowAutoLogin' => true,
+        ],
 
-		// uncomment the following to enable URLs in path-format
+        // uncomment the following to enable URLs in path-format
 
-		'urlManager'=>array(
-			'urlFormat'=>'path',
+        'urlManager' => [
+            'urlFormat' => 'path',
             'urlSuffix' => '.html',
             'showScriptName' => false,
-			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-			),
-		),
+            'rules' => [
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ],
+        ],
 
 
-		// database settings are configured in database.php
-		'db'=>require(dirname(__FILE__).'/database.php'),
+        // database settings are configured in database.php
+        'db' => require(dirname(__FILE__) . '/database.php'),
 
-		'errorHandler'=>array(
-			// use 'site/error' action to display errors
-			'errorAction'=>'site/error',
-		),
+        'errorHandler' => [
+            // use 'site/error' action to display errors
+            'errorAction' => 'site/error',
+        ],
 
-		'log'=>array(
-			'class'=>'CLogRouter',
-			'routes'=>array(
-				array(
-					'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-					'ipFilters'=>array('127.0.0.1','192.168.1.215'),
-				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
-			),
-		),
+        'log' => [
+            'class' => 'CLogRouter',
+            'routes' => [
+                [
+                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+                    'ipFilters' => ['127.0.0.1', '192.168.1.215'],
+                ],
+                // uncomment the following to show log messages on web pages
+                /*
+                array(
+                    'class'=>'CWebLogRoute',
+                ),
+                */
+            ],
+        ],
         'booster' => [
             'class' => 'application.extensions.YiiBooster.src.components.Booster',
             'fontAwesomeCss' => true,
             'responsiveCss' => true,
         ],
-        'assetManager'=>[
-            'class'=>'AssetManager',
+        'assetManager' => [
+            'class' => 'AssetManager',
+        ],
+        'authManager' => [
+            'class' => 'AuthManager',
+            'defaultRoles' => ['guest'],
         ],
 
-    ),
+    ],
 
-	// application-level parameters that can be accessed
-	// using Yii::app()->params['paramName']
-	'params'=>array(
-		// this is used in contact page
-		'adminEmail'=>'assailant85@mail.ru',
-	),
-);
+    // application-level parameters that can be accessed
+    // using Yii::app()->params['paramName']
+    'params' => [
+        // this is used in contact page
+        'adminEmail' => 'assailant85@mail.ru',
+    ],
+];
