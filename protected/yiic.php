@@ -1,7 +1,10 @@
 <?php
+$yiic='framework/yiic.php';
 
-// change the following paths if necessary
-$yiic=dirname(__FILE__).'/../../Users/Евгений/Desktop/home/yii/framework/yiic.php';
-$config=dirname(__FILE__).'/config/console.php';
+$config= include(__DIR__.'/config/console.php');
+
+if(is_file(__DIR__.'/config/database.php')) {
+    include(__DIR__.'/config/database.php');
+}
 
 require_once($yiic);
