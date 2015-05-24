@@ -7,7 +7,7 @@
 $form = $this->beginWidget('TbActiveForm', [
     'id' => 'login-form',
     'enableAjaxValidation' => false,
-    'htmlOptions' => ['style' => 'width: 100%'],
+    'htmlOptions' => ['style' => 'width: 100%; font-size: 16px;'],
     'showErrors' => false,
 ]); ?>
 
@@ -33,4 +33,11 @@ $form = $this->beginWidget('TbActiveForm', [
     'label' => 'Войти',
     'icon' => 'ok',
     'htmlOptions' => ['class' => 'btn-block', 'style' => 'font-size: 16px;']]); ?>
+
+    <hr>
+    <h4>Забыли пароль ?</h4>
+    без паники, <a href="<?php echo Yii::app()->createUrl('site/forgotPassword'); ?>">жмите
+    здесь</a> чтобы восстановить свой пароль.
+
+
 <?php $this->endWidget(); ?>

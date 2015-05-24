@@ -98,6 +98,9 @@ class SiteController extends Controller
 				$this->redirect(Yii::app()->user->returnUrl);
 		}
 		// display the login form
+        if(Yii::app()->request->isAjaxRequest)
+            Yii::app()->clientScript->defaultScriptPosition = CClientScript::POS_END;
+
         $this->render('login', ['model'=>$model], false, true);
 
 	}
