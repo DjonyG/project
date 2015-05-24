@@ -1,11 +1,12 @@
 <?php /* @var $this Controller */ ?>
+<?php /* @var $content string */ ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="en">
-    <base href="<?php echo Yii::app()->createAbsoluteUrl('/'); ?>/">
+    <base href="<?php echo Yii::app()->createUrl('/'); ?>/">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
     <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
@@ -18,12 +19,13 @@
     <![endif]-->
 
     <!-- FANCYBOX -->
-    <link rel="stylesheet" type="text/css"
-          href="<?php echo Yii::app()->assetManager->getAssetUrl('ext/fancybox/jquery.fancybox.css'); ?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->assetManager->getAssetUrl('ext/fancybox/jquery.fancybox.css'); ?>" />
     <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->assetManager->getAssetUrl('ext/fancybox/jquery.fancybox.pack.js')); ?>
+
 
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->assetManager->getAssetUrl('ext/ace/assets/css/daterangepicker.css'); ?>" />
 
     <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->assetManager->getAssetUrl('ext/ace/assets/js/ace-extra.min.js')); ?>
     <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->assetManager->getAssetUrl('ext/ace/assets/js/date-time/moment.min.js')); ?>
