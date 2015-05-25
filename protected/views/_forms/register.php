@@ -11,12 +11,6 @@
     'showErrors' => false,
 ]); ?>
 
-
-<h3 style="text-align: center;">
-    <span class="glyphicon glyphicon-pencil"></span>
-    Регистрация
-</h3>
-
 <?php echo $form->errorSummary($model); ?>
 
 <?php echo $form->textFieldGroup($model, 'username', [
