@@ -25,7 +25,8 @@ class UserIdentity extends CUserIdentity {
             // в самом приложении. Используется как Yii::app()->user->name.
             // realName есть в нашей модели. У вас это может быть name, firstName
             // или что-либо ещё.
-            $this->username = $user->realName;
+
+//            $this->username = $user->realName;
 
             $this->errorCode = self::ERROR_NONE;
         }

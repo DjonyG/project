@@ -105,6 +105,37 @@ class SiteController extends Controller
 
 	}
 
+    public function actionRegister()
+    {
+        if (!Yii::app()->user->isGuest) {
+            $this->redirect(['site/index']);
+        }
+        $model = new RegisterForm;
+
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'sign-up-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        if (isset($_POST['RegisterForm'])) {
+            $model->attributes = $_POST['RegisterForm'];
+            // validate user input and redirect to the previous page if valid
+            if ($model->validate()) {
+                $userId = $model->createNewUser();
+                if($userId === false) {
+                    throw new CException('Не удалось сохранить пользователя');
+                }
+                $userIdentity = new UserIdentity($model->username, null);
+                $userIdentity->authenticate($userId, true, true);
+                Yii::app()->user->login($userIdentity);
+
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+        }
+
+        $this->render('register', ['model' => $model]);
+    }
+
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */

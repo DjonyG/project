@@ -30,14 +30,11 @@ if (Yii::app()->user->isGuest) {
         ]
     );
 
-    $this->widget(
-        'booster.widgets.TbButton', [
-        'buttonType' => TbButton::BUTTON_BUTTON,
-        'context' => 'info',
-        'size' => 'large',
-        'label' => 'Регистрация',
-        'htmlOptions' => ['class' => 'btn-block',
-            'style' => 'font-size: 22px; margin: 25px auto 0 auto; max-width: 250px;']]);
+    echo CHtml::link('Регистрация', $this->createUrl('/site/register'),
+        ['class' => 'btn btn-primary btn-block',
+         'style' => 'font-size: 22px; margin: 25px auto 0 auto; max-width: 250px;'
+        ]);
+
 
 } else {
     $this->beginWidget(
