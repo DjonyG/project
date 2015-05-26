@@ -46,7 +46,17 @@ class SiteController extends Controller
 		}
 	}
 
-	/**
+    public function actionImpersonate($id)
+    {
+        if(Yii::app()->user->impersonate($id)) {
+            $this->redirect(Yii::app()->createUrl('/site/index'));
+        } else {
+            $this->redirect(Yii::app()->user->returnUrl);
+        }
+    }
+
+
+    /**
 	 * Displays the contact page
 	 */
 	public function actionContact()
@@ -125,8 +135,8 @@ class SiteController extends Controller
                 if($userId === false) {
                     throw new CException('Не удалось сохранить пользователя');
                 }
-                $userIdentity = new UserIdentity($model->username, null);
-                $userIdentity->authenticate($userId, true, true);
+                $userIdentity = new UserIdentity($model->email, null);
+                $userIdentity->authenticate($userId);
                 Yii::app()->user->login($userIdentity);
 
                 $this->redirect(Yii::app()->user->returnUrl);
@@ -135,7 +145,6 @@ class SiteController extends Controller
 
         $this->render('register', ['model' => $model]);
     }
-
 	/**
 	 * Logs out the current user and redirect to homepage.
 	 */

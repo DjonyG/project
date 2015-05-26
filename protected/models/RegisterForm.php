@@ -7,7 +7,7 @@
  */
 class RegisterForm extends CFormModel
 {
-    public $username;
+    public $email;
     public $password;
     public $acceptTerms = true;
 
@@ -21,10 +21,10 @@ class RegisterForm extends CFormModel
     public function rules()
     {
         return [
-            ['username, password', 'required'],
-//            ['username', 'email'],
-            ['username', 'length', 'max'=>255],
-            ['username', 'uniqueValidator'],
+            ['email, password', 'required'],
+            ['email', 'email'],
+            ['email', 'length', 'max'=>255],
+            ['email', 'uniqueValidator'],
             ['password', 'length', 'min'=>6],
             ['acceptTerms', 'validationAcceptTerms'],
         ];
@@ -32,8 +32,8 @@ class RegisterForm extends CFormModel
 
     public function uniqueValidator($attribute)
     {
-        if(!$this->hasErrors() && User::model()->exists('username = :username', [':username'=>$this->$attribute])) {
-            $this->addError($attribute, 'Пользователь с таким email-ом или телефоном уже существует');
+        if(!$this->hasErrors() && User::model()->exists('email = :email', [':email'=>$this->$attribute])) {
+            $this->addError($attribute, 'Пользователь с таким email-ом уже существует');
         }
     }
 
@@ -50,7 +50,7 @@ class RegisterForm extends CFormModel
     public function attributeLabels()
     {
         return [
-            'username'=>'E-mail или телефон',
+            'email'=>'E-mail',
             'password'=>'Пароль',
             'acceptTerms'=> 'Я согласен с <a href="' . Yii::app()->createUrl('/page/terms') . '">правилами использования сайта</a>',
         ];
@@ -59,7 +59,7 @@ class RegisterForm extends CFormModel
     public function createNewUser()
     {
         $user = new User();
-        $user->username = $this->username;
+        $user->email = $this->email;
         $user->new_password = $this->password;
         return $user->save()? $user->id : false;
     }

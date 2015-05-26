@@ -13,7 +13,7 @@ $form = $this->beginWidget('TbActiveForm', [
 
 <?php echo $form->errorSummary($model); ?>
 
-<?php echo $form->textFieldGroup($model, 'username', [
+<?php echo $form->textFieldGroup($model, 'email', [
     'labelOptions' => ['label' => false],
     'prepend' => '<i class="fa fa-user"></i>',
 
@@ -23,7 +23,11 @@ $form = $this->beginWidget('TbActiveForm', [
     'prepend' => '<i class="fa fa-lock"></i>'
 
 ]); ?>
-<?php echo $form->checkboxGroup($model, 'rememberMe'); ?>
+<?php echo $form->checkboxGroup($model, 'rememberMe', [
+    'widgetOptions' => [
+        'htmlOptions' => ['checked' => 'checked'],
+    ],
+]); ?>
 
 
 <?php $this->widget(

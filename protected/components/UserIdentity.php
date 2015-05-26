@@ -6,30 +6,37 @@
  * data can identity the user.
  */
 class UserIdentity extends CUserIdentity {
-    // Будем хранить id.
+
+    const ERROR_BANNED_FULL = 50;
+
     protected $_id;
 
     // Данный метод вызывается один раз при аутентификации пользователя.
-    public function authenticate(){
-        // Производим стандартную аутентификацию, описанную в руководстве.
-        $user = User::model()->find('LOWER(login)=?', array(strtolower($this->username)));
-        if(($user===null) || (md5($this->password)!==$user->password)) {
-            $this->errorCode = self::ERROR_USERNAME_INVALID;
+    public function authenticate($id = false){
+
+        if($id) {
+            $model = User::model()->findByPk($id);
         } else {
-            // В качестве идентификатора будем использовать id, а не username,
-            // как это определено по умолчанию. Обязательно нужно переопределить
-            // метод getId(см. ниже).
-            $this->_id = $user->id;
-
-            // Далее логин нам не понадобится, зато имя может пригодится
-            // в самом приложении. Используется как Yii::app()->user->name.
-            // realName есть в нашей модели. У вас это может быть name, firstName
-            // или что-либо ещё.
-
-//            $this->username = $user->realName;
-
-            $this->errorCode = self::ERROR_NONE;
+            $model = User::model()->findByAttributes(array('email'=>$this->username));
         }
+
+        if(is_null($model)) {
+            $this->errorCode=self::ERROR_USERNAME_INVALID;
+            $this->errorMessage = 'Неверный Email или Пароль';
+        }else if ($model->password !== sha1($this->password) && $id === false) {
+            $this->errorCode=self::ERROR_PASSWORD_INVALID;
+            $this->errorMessage = 'Неверный Email или Пароль';
+        }else{
+            if($model->banned == User::BAN_TYPE_FULL) {
+                $this->errorCode = self::ERROR_BANNED_FULL;
+                $this->errorMessage = 'Ваша учетная запись запрещена';
+            }
+            else {
+                $this->_id = $model->id;
+                $this->errorCode = self::ERROR_NONE;
+            }
+        }
+
         return !$this->errorCode;
     }
 

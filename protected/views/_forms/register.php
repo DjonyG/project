@@ -13,7 +13,7 @@
 
 <?php echo $form->errorSummary($model); ?>
 
-<?php echo $form->textFieldGroup($model, 'username', [
+<?php echo $form->textFieldGroup($model, 'email', [
     'labelOptions' => ['label' => false],
     'prepend' => '<i class="fa fa-user"></i>',
 

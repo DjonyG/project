@@ -32,7 +32,7 @@ if (Yii::app()->user->isGuest) {
 
     echo CHtml::link('Регистрация', $this->createUrl('/site/register'),
         ['class' => 'btn btn-primary btn-block',
-         'style' => 'font-size: 22px; margin: 25px auto 0 auto; max-width: 250px;'
+            'style' => 'font-size: 22px; margin: 25px auto 0 auto; max-width: 250px;'
         ]);
 
 
@@ -43,7 +43,7 @@ if (Yii::app()->user->isGuest) {
             'heading' => 'Добро пожаловать!',
         ]
     );
-
+    $this->endWidget();
 }
 ?>
 
