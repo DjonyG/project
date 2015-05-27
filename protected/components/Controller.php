@@ -21,26 +21,57 @@ class Controller extends CController
      */
     public $breadcrumbs=array();
 
-    public static $counter = 0;
 
+    public function init()
+    {
+
+        if(strpos($_SERVER['SERVER_NAME'], 'www.') === 0) {
+            $uri = $_SERVER['REQUEST_URI'];
+            $domain = str_replace('www.', '', $_SERVER['SERVER_NAME']);
+            $schema = Yii::app()->request->isSecureConnection? 'https' : 'http';
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: {$schema}://{$domain}{$uri}");
+            exit();
+        }
+
+        if(Yii::app()->user->profile && !Yii::app()->user->isImpersonate()) {
+            if(Yii::app()->user->isBanned == User::BAN_TYPE_FULL) {
+                Yii::app()->user->logout(true);
+                $this->redirect(['/site/login']);
+            }
+
+            $password_session = Yii::app()->session->get('password_hash', false);
+            if((Yii::app()->user->profile && $password_session && $password_session !== Yii::app()->user->profile->password)
+                || !Helper::isEqualNetwork(Yii::app()->session->get('session_ip'), Yii::app()->request->userHostAddress))
+            {
+                Yii::app()->user->logout();
+                $this->redirect(['/site/login']);
+            }
+        }
+
+        //Force logout not exist user
+        if(!Yii::app()->user->isGuest && is_null(Yii::app()->user->profile)) {
+            Yii::app()->user->logout();
+        }
+        parent::init();
+
+        if(!Yii::app()->user->isImpersonate()) {
+            if(!Yii::app()->user->isGuest) {
+                Yii::app()->user->profile->updateLastInfo();
+            }
+        }
+    }
 
     public function beforeAction($action)
     {
-        self::$counter++;
-
         if($this->route == 'site/index' && Yii::app()->request->isSecureConnection) {
             Yii::app()->request->redirect('http://' . Yii::app()->getRequest()->serverName
                 . Yii::app()->getRequest()->requestUri);
         }
 
-        if(Yii::app()->user->isImpersonate() && self::$counter == 1) {
+        if(Yii::app()->user->isImpersonate()) {
             UserMessage::add('Impersonate mode! &ensp; <a href="' . Yii::app()->createUrl('/auth/logout') . '">Return</a>', UserMessage::TYPE_WARNING);
         }
-
-        if(!Yii::app()->user->isGuest) {
-            Yii::app()->user->profile->updateLastInfo();
-        }
-
         return parent::beforeAction($action);
     }
 
