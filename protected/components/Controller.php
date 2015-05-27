@@ -37,6 +37,10 @@ class Controller extends CController
             UserMessage::add('Impersonate mode! &ensp; <a href="' . Yii::app()->createUrl('/auth/logout') . '">Return</a>', UserMessage::TYPE_WARNING);
         }
 
+        if(!Yii::app()->user->isGuest) {
+            Yii::app()->user->profile->updateLastInfo();
+        }
+
         return parent::beforeAction($action);
     }
 

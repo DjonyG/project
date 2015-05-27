@@ -37,6 +37,11 @@ class UserIdentity extends CUserIdentity {
             }
         }
 
+        if (!is_null($model) && in_array($this->errorCode, [self::ERROR_NONE])
+            && (long2ip($model->ip_last) != Yii::app()->request->userHostAddress || empty($model->date_last))
+        )
+            $model->updateLastInfo();
+
         return !$this->errorCode;
     }
 

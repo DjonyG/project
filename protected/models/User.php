@@ -181,6 +181,21 @@ class User extends CActiveRecord
         return substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', 5)), 0, $maxLength);
     }
 
+    public function updateLastInfo()
+    {
+        Yii::app()->db->createCommand("
+            UPDATE project.user
+            SET
+              ip_last = INET_ATON(:ip_last),
+              date_last = CURRENT_TIMESTAMP
+            WHERE id = :user_id
+        ")->execute([
+            ':ip_last' => Yii::app()->request->userHostAddress,
+            ':user_id' => $this->id
+        ]);
+
+    }
+
     /**
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
