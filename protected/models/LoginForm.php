@@ -54,7 +54,7 @@ class LoginForm extends CFormModel
 		{
 			$this->_identity=new UserIdentity($this->email,$this->password);
 			if(!$this->_identity->authenticate())
-				$this->addError('password','Неверный Email или Пароль.');
+				$this->addError('password', $this->_identity->errorMessage);
 		}
 	}
 
