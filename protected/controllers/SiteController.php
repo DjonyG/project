@@ -149,8 +149,14 @@ class SiteController extends Controller
 	 * Logs out the current user and redirect to homepage.
 	 */
 	public function actionLogout()
-	{
-		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->homeUrl);
-	}
+    {
+        if($id = Yii::app()->user->isImpersonate()) {
+            Yii::app()->user->unImpersonate();
+            $this->redirect(Yii::app()->user->returnUrl && Yii::app()->user->returnUrl != Yii::app()->request->url?
+                Yii::app()->user->returnUrl : array('/site/index'));
+        } else {
+            Yii::app()->user->logout();
+            $this->redirect(Yii::app()->homeUrl);
+        }
+    }
 }

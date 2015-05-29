@@ -58,7 +58,7 @@
                     'htmlOptions' => ['class' => 'pull-right'],
                     'items' => [
                         ['label' => 'Вход', 'url' => ['/site/login'], 'visible' => Yii::app()->user->isGuest, 'linkOptions' => ['class' => 'fancybox.ajax various'], 'active' => true],
-                        ['label' => 'Выход (' . Yii::app()->user->name . ')', 'url' => ['/site/logout'], 'visible' => !Yii::app()->user->isGuest,  'active' => true],
+                        ['label' => (Yii::app()->user->isImpersonate()) ? 'Вернуться' : 'Выход (' . Yii::app()->user->name . ')', 'url' => ['/site/logout'], 'visible' => !Yii::app()->user->isGuest,  'active' => true],
                     ],
                 ],
             ],
