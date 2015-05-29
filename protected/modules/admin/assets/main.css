@@ -1,0 +1,217 @@
+.header {
+    height: 50px;
+}
+
+#footer {
+    text-align: center;
+    padding: 15px 0;
+    padding-bottom: 7px;
+    margin-top: 30px;
+    border-top: 1px solid #e5e5e5;
+    background-color: #f5f5f5;
+    font-size: 12px;
+}
+
+.quote_red{
+    color: #ff4040;
+}
+.quote_yellow{
+    color: #ffb259;
+}
+.quote_green{
+    color: #26B638;
+}
+
+.copyright-yellow {
+    color: #d49201;
+}
+.copyright-red {
+    color: red;
+}
+.copyright-green {
+    color: #06a900;
+}
+.deleted-sign {
+    font-weight: bold;
+    color: red;
+    font-size: 11px;
+}
+.copyright-yellow, .copyright-red, .copyright-green, .deleted-sign {
+    display: inline-block;
+    width: 11px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+span.align-first {
+    display: inline-block;
+    white-space: nowrap;
+    text-align: right;
+}
+span.align-second {
+    display: inline-block;
+    white-space: nowrap;
+    text-align: left;
+}
+.align-center {
+    text-align: center;
+}
+
+/* Upgrade для Bootstrap'овского меню в админке */
+
+.nav-sidebar .nav-header {
+    display: block;
+    padding: 2px 20px;
+    background-color: #CCDBEA;
+    font-size: 16px;
+}
+
+.toggle-menu {
+    font-size: 12px;
+    border-top: 1px dotted gray;
+    border-bottom: 1px dotted gray;
+}
+
+table {
+    width: auto !important;
+}
+.grid-view {
+    display: inline-block !important;
+}
+.billing-toggle-block {
+    cursor: default;
+    background: #f8f8f8;
+    padding: 5px 10px;
+    border: 1px solid #eae4ed;
+    margin-bottom: 5px;
+}
+
+.billing-toggle-block:hover {
+    background-color: #edf9ff;
+    border-top-left-radius: 10px;
+}
+
+.billing-toggle-block > div {
+    display: inline-block;
+}
+#footer-admin {
+    display: inline-block;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 1030;
+    padding: 5px 10px;
+    box-shadow: -2px -2px 4px #808080;
+    opacity: 0.8;
+    background-color: #FFF;
+    font-size: 13px;
+}
+
+.header-for-table .sort-link.desc:before {
+    content: "▾ ";
+}
+.header-for-table .sort-link.asc:before {
+    content: "▴ ";
+}
+.header-for-table.grid-view table.items th:hover a:after {
+    background-image: none;
+}
+.header-for-table .toggle-user-data,
+.header-for-table .toggle-user-data:hover {
+    text-decoration: none;
+    border-bottom: 1px dotted blue;
+}
+.header-for-table table.child-data {
+    width: 100% !important;
+}
+
+td .alert-time {
+    padding: 2px 4px;
+    background-color: pink;
+}
+.sort-link {
+    white-space: nowrap;
+}
+
+#visual-user {
+    margin: 30px;
+}
+
+#visual-user table,#visual-user table tr{
+    border-collapse: collapse;
+    padding: 0;
+    border:  1px solid #cdcbcc;
+}
+#visual-user table {
+    margin-bottom: 10px;
+}
+
+#visual-user table td {
+    border: inherit;
+    padding: 2px 5px;
+}
+
+.refresh-grid {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.refresh-grid a {
+    text-decoration: none;
+    border-bottom: 1px dotted #08C;
+}
+.refresh-grid a:hover {
+    text-decoration: none;
+}
+
+#language_selector a {
+    color: #000000 !important;
+}
+
+#language_selector a {
+    color: #333333 !important;
+}
+
+#language_selector .current,
+#language_selector .other {
+    width: 100px;
+}
+
+#language_selector .current {
+    padding: 5px 10px;
+    margin: 0 !important;
+    background: rgb(242, 242, 242) !important;
+    border: 1px solid #d4d4d4;
+}
+#language_selector .other {
+    padding: 10px;
+    margin: 0 !important;
+    background: rgb(242, 242, 242) !important;
+    border: 1px solid #d4d4d4;
+    border-top: none;
+}
+
+.progress .bar.bar-default {
+    background-color: #C4C4C4;
+    background-image: linear-gradient(to bottom, #DFDFDF, #C4C4C4);
+}
+
+.cache-key-row {
+    padding: 2px 10px;
+}
+.cache-key-row:hover {
+    background-color: #fff7c0;
+}
+.cache-key-row .key {
+    display: inline-block;
+    min-width: 300px;
+}
+.cache-key-row .key a {
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+}
+.cache-key-row .key a:hover {
+    border-bottom-color: cornflowerblue;
+}
+.cache-key-row .key-info {
+    color: #aaa;
+}

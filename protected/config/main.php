@@ -21,7 +21,7 @@ return [
     ],
 
     'modules' => [
-        // uncomment the following to enable the Gii tool
+        'admin',
 
         'gii' => [
             'class' => 'system.gii.GiiModule',
@@ -56,7 +56,15 @@ return [
 
 
         // database settings are configured in database.php
-        'db' => require(dirname(__FILE__) . '/database.php'),
+//        'db' => require(dirname(__FILE__) . '/database.php'),
+
+        'db'=>array(
+            'connectionString' => 'mysql:host=localhost;dbname=project',
+            'emulatePrepare' => true,
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ),
 
         'errorHandler' => [
             // use 'site/error' action to display errors

@@ -38,23 +38,10 @@ class WebUser extends CWebUser {
         return 'guest';
     }
 
-
-//    public function setParam($name, $value)
-//    {
-//        UserSettings::set($name, $value, $this->id);
-//    }
-//
-//    public function getParam($name, $default = null)
-//    {
-//        //Если имеется индивидуальный параметр, то отдаем его
-//        if($this->id) {
-//            $value = UserSettings::get($name, false, $this->id);
-//            if($value !== false) {
-//                return $value;
-//            }
-//        }
-//        return isset($this->params[$name])? $this->params[$name] : $default;
-//    }
+    public function getParam($name, $default = null)
+    {
+        return isset($this->params[$name])? $this->params[$name] : $default;
+    }
 
     public function getAuthItem()
     {
@@ -74,12 +61,8 @@ class WebUser extends CWebUser {
             throw new CHttpException(404, 'Only manager or admins has right access to impersonating.');
         }
 
-        if(!$this->checkAccess('administrator') && !in_array($user->role, ['registered', 'partner'])) {
+        if(!$this->checkAccess('administrator') && !in_array($user->role, ['registered'])) {
             throw new CHttpException(404, 'You can impersonate only under Registered ot Partner roles.');
-        }
-
-        if($this->role == 'manager' && $user->manager_id != $this->id) {
-            throw new CHttpException(403, 'You can not enter that user');
         }
 
         if($this->id == $user_id) {
