@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="language" content="en"/>
 
-    <link href="<?php echo Html::staticUrl('images/favicon.ico'); ?>" rel="shortcut icon" type="image/x-icon"/>
+<!--    <link href="--><?php //echo Html::staticUrl('images/favicon.ico'); ?><!--" rel="shortcut icon" type="image/x-icon"/>-->
 
     <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
     <?php Yii::app()->clientScript->registerCoreScript('jquery.ui'); ?>
@@ -58,8 +58,6 @@
                     'id' => 'admin-menu'
                 ],
                 'items' => [
-                    ['label' => 'WebApp', 'url' => ['/', '#' => ''], 'icon' => 'home'],
-                    ['label' => 'показать все', 'itemOptions' => ['class' => 'nav-stat toggle-menu', 'onclick' => '$(".nav-list .nav-header").click(); return false;'], 'url' => ['#']],
                     ['label' => 'Users', 'itemOptions' => ['class' => 'nav-header'], 'visible' => Yii::app()->user->checkAccess('administrator')],
                     ['label' => 'Users', 'url' => ['/admin/user/admin'], 'icon' => 'user', 'visible' => Yii::app()->user->checkAccess('administrator'), 'itemOptions' => ['class' => 'nav-stat', 'menu-id' => 1]],
 
@@ -73,8 +71,6 @@
         </div>
     </div>
 </div>
-
-
 
 </body>
 </html>

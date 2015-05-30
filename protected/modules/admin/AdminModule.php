@@ -12,6 +12,8 @@ class AdminModule extends CWebModule
 			'admin.models.*',
 			'admin.components.*',
 		));
+
+        $this->registerAssets();
 	}
 
     public function registerAssets()
