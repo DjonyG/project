@@ -45,6 +45,10 @@ class UserController extends AdminController
     {
         $model = $this->loadModel($id);
 
+        if (Yii::app()->user->role == 'administrator') {
+            $model->setScenario('admin');
+        }
+
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -78,10 +82,7 @@ class UserController extends AdminController
      */
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('User');
-        $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        $this->redirect('admin');
     }
 
     /**

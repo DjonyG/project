@@ -1,94 +1,52 @@
 <?php
 /* @var $this UserController */
 /* @var $model User */
-/* @var $form CActiveForm */
+/* @var $form TbActiveForm */
 ?>
 
-<div class="form">
+<?php $form = $this->beginWidget('TbActiveForm', [
+    'id' => 'user-form',
+    'enableAjaxValidation' => false,
+    'type' => 'horizontal',
+    'htmlOptions' => ['class' => 'well col-sm-5']
+]); ?>
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'user-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-)); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<?php echo $form->errorSummary($model); ?>
 
-	<?php echo $form->errorSummary($model); ?>
+<?php if (Yii::app()->user->checkAccess('administrator')): ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>50,'maxlength'=>50)); ?>
-		<?php echo $form->error($model,'email'); ?>
-	</div>
+    <?php echo $form->textFieldGroup($model, 'email'); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'date_created'); ?>
-		<?php echo $form->textField($model,'date_created'); ?>
-		<?php echo $form->error($model,'date_created'); ?>
-	</div>
+    <?php echo $form->dropDownListGroup($model, 'email_is_verified', [
+        'wrapperHtmlOptions' => ['class' => 'col-lg-3'],
+        'widgetOptions' => [
+            'data' => [0 => 'No', 1 => 'Yes'],
+        ],
+    ]); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'date_last'); ?>
-		<?php echo $form->textField($model,'date_last'); ?>
-		<?php echo $form->error($model,'date_last'); ?>
-	</div>
+    <?php echo $form->textFieldGroup($model, 'new_password', [
+        'size' => 14,
+        'maxlength' => 40,
+    ]); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'ip_create'); ?>
-		<?php echo $form->textField($model,'ip_create',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'ip_create'); ?>
-	</div>
+    <?php echo $form->dropDownListGroup($model, 'banned', [
+        'wrapperHtmlOptions' => ['class' => 'col-lg-3'],
+        'widgetOptions' => [
+            'data' => User::$banTypes,
+        ],
+    ]); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'ip_last'); ?>
-		<?php echo $form->textField($model,'ip_last',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'ip_last'); ?>
-	</div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <?php $this->widget('booster.widgets.TbButton', [
+                'buttonType' => 'submit',
+                'context' => 'primary',
+                'label' => $model->isNewRecord ? 'Create' : 'Update'
+            ]); ?>
+        </div>
+    </div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>40,'maxlength'=>40)); ?>
-		<?php echo $form->error($model,'password'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'role'); ?>
-		<?php echo $form->textField($model,'role',array('size'=>13,'maxlength'=>13)); ?>
-		<?php echo $form->error($model,'role'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'email_is_verified'); ?>
-		<?php echo $form->textField($model,'email_is_verified'); ?>
-		<?php echo $form->error($model,'email_is_verified'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'banned'); ?>
-		<?php echo $form->textField($model,'banned'); ?>
-		<?php echo $form->error($model,'banned'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'security_lock'); ?>
-		<?php echo $form->textField($model,'security_lock'); ?>
-		<?php echo $form->error($model,'security_lock'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'comment'); ?>
-		<?php echo $form->textArea($model,'comment',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'comment'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+<?php endif; ?>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- form -->
