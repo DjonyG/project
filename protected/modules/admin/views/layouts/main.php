@@ -40,7 +40,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a><?php echo date('Y-m-d H:i:s'); ?></a></li>
                 <li>
-                    <a href="<?php echo Yii::app()->createUrl('/site/logout'); ?>"><?php echo (Yii::app()->user->isImpersonate() ? 'Return ' : 'Logout ') . '(' . Yii::app()->user->name . ')'; ?></a>
+                    <a href="<?php echo Yii::app()->createUrl('/site/logout'); ?>"><?php echo (Yii::app()->user->isImpersonate() ? 'Вернуться ' : 'Выйти ') . '(' . Yii::app()->user->name . ')'; ?></a>
                 </li>
             </ul>
         </div>

@@ -93,7 +93,7 @@ $('.search-form form').submit(function(){
             'template' => '{view} {update} {delete} {impersonate}',
             'buttons' => [
                 'impersonate' => [
-                    'label' => 'Login as this this user',
+                    'label' => 'Войти под этим пользователем',
                     'icon' => 'user',
                     'url' => 'Yii::app()->createUrl("site/impersonate", array("id"=>$data->id))',
                 ],
