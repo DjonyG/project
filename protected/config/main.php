@@ -103,8 +103,5 @@ return [
 
     // application-level parameters that can be accessed
     // using Yii::app()->params['paramName']
-    'params' => [
-        // this is used in contact page
-        'adminEmail' => 'assailant85@mail.ru',
-    ],
+    'params' => include (__DIR__) . '/params.php',
 ];

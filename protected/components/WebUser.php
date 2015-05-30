@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: Hett
- * Date: 17.07.12
- * Time: 12:38
- */
 
 /**
  * @property string $role
