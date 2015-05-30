@@ -172,6 +172,11 @@ label
 {
     font-size: 14px;
 }
+/*UserMessage*/
+#msg_
+{
+    font-size: 18px;
+}
 
 .portlet-decoration
 {

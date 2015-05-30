@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $this Controller
+ * @var $content string
  */
 ?>
 <?php $this->beginContent('/layouts/main'); ?>
@@ -37,7 +38,7 @@ if (count($this->menu) > 0) {
     );
 }
 ?>
-
+<?php $this->widget('application.components.widgets.userMessage.UserMessageWidget'); ?>
 <?php echo $content; ?>
 
 <?php $this->endContent(); ?>

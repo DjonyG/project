@@ -70,7 +70,7 @@ class Controller extends CController
         }
 
         if(Yii::app()->user->isImpersonate()) {
-            UserMessage::add('Impersonate mode! &ensp; <a href="' . Yii::app()->createUrl('/auth/logout') . '">Return</a>', UserMessage::TYPE_WARNING);
+            UserMessage::add('Impersonate mode!', UserMessage::TYPE_WARNING);
         }
         return parent::beforeAction($action);
     }

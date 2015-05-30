@@ -67,6 +67,7 @@
             ]); ?>
         </div>
 
+        <?php $this->widget('application.components.widgets.userMessage.UserMessageWidget'); ?>
         <div class="col-md-10 col-md-offset-2">
             <?php echo $content; ?>
         </div>

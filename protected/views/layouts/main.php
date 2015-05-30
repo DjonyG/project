@@ -65,7 +65,9 @@
         ]
     );
     ?>
-
+    <div style="margin: 0 35px; font-size: 22px">
+        <?php $this->widget('application.components.widgets.userMessage.UserMessageWidget'); ?>
+    </div>
     <?php if (isset($this->breadcrumbs)): ?>
         <?php $this->widget('zii.widgets.CBreadcrumbs', [
             'links' => $this->breadcrumbs,
