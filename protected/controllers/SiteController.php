@@ -7,18 +7,18 @@ class SiteController extends Controller
 	 */
 	public function actions()
 	{
-		return array(
+		return [
 			// captcha action renders the CAPTCHA image displayed on the contact page
-			'captcha'=>array(
+			'captcha'=>[
 				'class'=>'CCaptchaAction',
 				'backColor'=>0xFFFFFF,
-			),
+			],
 			// page action renders "static" pages stored under 'protected/views/site/pages'
 			// They can be accessed via: index.php?r=site/page&view=FileName
-			'page'=>array(
+			'page'=>[
 				'class'=>'CViewAction',
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -79,7 +79,7 @@ class SiteController extends Controller
 				$this->refresh();
 			}
 		}
-		$this->render('contact',array('model'=>$model));
+		$this->render('contact',['model'=>$model]);
 	}
 
 	/**
@@ -145,15 +145,73 @@ class SiteController extends Controller
 
         $this->render('register', ['model' => $model]);
     }
-	/**
-	 * Logs out the current user and redirect to homepage.
+
+    public function actionForgotPassword()
+    {
+
+        $model = new ForgotPasswordForm;
+
+        if (isset($_POST['ForgotPasswordForm'])) {
+            $model->attributes = $_POST['ForgotPasswordForm'];
+            if ($model->validate()) {
+                /** @var $user User */
+                $user = User::model()->findByAttributes(['email' => $model->email]);
+                $code = new ActivationCode();
+                $code->operation = ActivationCode::OPERATION_FORGOT_PASSWORD;
+                $code->user_id = $user->id;
+                if ($code->save()) {
+                    if (Mail::send($user->email, 'Forgotten password', $this->renderPartial('//_messages/forgotPassword', ['code' => $code], true))) {
+                        UserMessage::addFlash('Инструкция высланы на ваш E-mail');
+                        $this->redirect(['/auth/resetPassword']);
+                    } else {
+                        UserMessage::addFlash('Отправить сообщение не удалось', UserMessage::TYPE_WARNING);
+                    }
+                }
+            }
+        }
+        $this->render('forgotPassword', ['model' => $model]);
+    }
+
+    public function actionResetPassword($code = null)
+    {
+        $model = new ResetPasswordForm;
+        if (empty($model->code)) {
+            $model->code = $code;
+        }
+
+        if (isset($_POST['ResetPasswordForm'])) {
+            $model->attributes = $_POST['ResetPasswordForm'];
+            if ($model->validate()) {
+                //set password
+                /** @var $code ActivationCode */
+                $code = ActivationCode::model()->findByAttributes(['id' => $model->code]);
+                if (!is_null($code)) {
+                    $code->user->new_password = $model->new_password;
+                    $code->user->save(false);
+                    ActivationCode::model()->deleteAllByAttributes([
+                        'user_id' => $code->user_id,
+                        'operation' => ActivationCode::OPERATION_FORGOT_PASSWORD,
+                    ]);
+
+                    UserMessage::addFlash('Password was changed');
+                    Yii::app()->user->returnUrl = ['site/index'];
+                    $this->redirect(['site/index']);
+                }
+            }
+        }
+        $this->render('resetPassword', ['model' => $model]);
+    }
+
+
+    /**
+     * Logs out the current user and redirect to homepage.
 	 */
 	public function actionLogout()
     {
         if($id = Yii::app()->user->isImpersonate()) {
             Yii::app()->user->unImpersonate();
             $this->redirect(Yii::app()->user->returnUrl && Yii::app()->user->returnUrl != Yii::app()->request->url?
-                Yii::app()->user->returnUrl : array('/site/index'));
+                Yii::app()->user->returnUrl : ['/site/index']);
         } else {
             Yii::app()->user->logout();
             $this->redirect(Yii::app()->homeUrl);

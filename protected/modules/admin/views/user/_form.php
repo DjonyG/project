@@ -11,10 +11,7 @@
     'htmlOptions' => ['class' => 'well col-sm-5']
 ]); ?>
 
-
-<?php echo $form->errorSummary($model); ?>
-
-<?php if (Yii::app()->user->checkAccess('administrator')): ?>
+    <?php echo $form->errorSummary($model); ?>
 
     <?php echo $form->textFieldGroup($model, 'email'); ?>
 
@@ -46,7 +43,5 @@
             ]); ?>
         </div>
     </div>
-
-<?php endif; ?>
 
 <?php $this->endWidget(); ?>

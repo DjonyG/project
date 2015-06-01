@@ -184,7 +184,7 @@ class User extends CActiveRecord
     public function updateLastInfo()
     {
         Yii::app()->db->createCommand("
-            UPDATE project.user
+            UPDATE user
             SET
               ip_last = INET_ATON(:ip_last),
               date_last = CURRENT_TIMESTAMP

@@ -9,7 +9,8 @@ $this->breadcrumbs=array(
 $this->beginWidget(
     'booster.widgets.TbPanel',
     [
-        'title'       => 'Home admin page',
+        'title'       => 'Страница Администратора',
+        'context' => 'info',
         'headerIcon'  => 'home',
         'content'     => '',
         'htmlOptions' => ['style' => 'margin-top: 20px; display: inline-block; width:100%;']

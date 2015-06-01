@@ -22,7 +22,6 @@ return [
 
     'modules' => [
         'admin',
-
         'gii' => [
             'class' => 'system.gii.GiiModule',
             'password' => '1234',
