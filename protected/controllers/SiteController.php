@@ -162,7 +162,7 @@ class SiteController extends Controller
                 if ($code->save()) {
                     if (Mail::send($user->email, 'Forgotten password', $this->renderPartial('//_messages/forgotPassword', ['code' => $code], true))) {
                         UserMessage::addFlash('Инструкция высланы на ваш E-mail');
-                        $this->redirect(['/auth/resetPassword']);
+                        $this->redirect(['/site/resetPassword']);
                     } else {
                         UserMessage::addFlash('Отправить сообщение не удалось', UserMessage::TYPE_WARNING);
                     }

@@ -1,9 +1,4 @@
 <?php
-/**
- * User: Hett
- * Date: 3/20/12
- * Time: 1:59 PM
- */
 
 class Mail {
 

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "{{activation_code}}".
+ * This is the model class for table 'activation_code'.
  *
- * The followings are the available columns in table '{{activation_code}}':
+ * The followings are the available columns in table 'activation_code':
  * @property string $id
  * @property string $user_id
  * @property integer $operation
@@ -36,7 +36,7 @@ class ActivationCode extends CActiveRecord
      */
     public function tableName()
     {
-        return '{{activation_code}}';
+        return 'activation_code';
     }
 
     public function beforeSave()

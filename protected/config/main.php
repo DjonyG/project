@@ -16,6 +16,8 @@ return [
     // autoloading model and component classes
     'import' => [
         'application.models.*',
+        'application.models.forms.*',
+        'application.models.validators.*',
         'application.components.*',
         'application.extensions.YiiBooster.src.widgets.*',
     ],

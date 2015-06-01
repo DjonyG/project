@@ -26,7 +26,7 @@ class ResetPasswordForm extends CFormModel {
     public function attributeLabels()
     {
         return array(
-            'code'=>'Secret code',
+            'code'=>'Секретный код',
             'new_password'=>'Новый пароль',
             'new_password_confirm'=>'Подтвердите новый пароль',
         );
