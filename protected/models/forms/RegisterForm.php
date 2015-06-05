@@ -11,7 +11,6 @@ class RegisterForm extends CFormModel
     public $password;
     public $acceptTerms = true;
 
-    private $identity;
 
     /**
      * Declares the validation rules.

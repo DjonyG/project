@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'emailNoReply' => 'no-reply@meets.com',
+    'emailNoReply' => 'no-reply@знакомства.ru',
     'ourDomains' => [
-        'meets.com',
+        'знакомства.ru',
     ],
     'smtp'=>include(__DIR__.DIRECTORY_SEPARATOR.'smtp.php'),
 ];

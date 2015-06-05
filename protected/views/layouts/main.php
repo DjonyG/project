@@ -89,8 +89,8 @@
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/page', 'view' => 'about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
-                    ['label' => 'Вход', 'url' => ['/site/login']],
-                    ['label' => 'Регистрация', 'url' => ['/site/register']],
+                    ['label' => 'Вход', 'url' => ['/site/login'],'visible' => Yii::app()->user->isGuest],
+                    ['label' => 'Регистрация', 'url' => ['/site/register'],'visible' => Yii::app()->user->isGuest],
                 ],
             ]); ?>
 
