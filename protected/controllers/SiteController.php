@@ -146,6 +146,33 @@ class SiteController extends Controller
         $this->render('register', ['model' => $model]);
     }
 
+    public function actionProfile()
+    {
+
+        $model = new Profile;
+
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'profile-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        if (isset($_POST['Profile'])) {
+            $model->attributes = $_POST['Profile'];
+            /** @var $user User */
+            $user = User::model()->findByAttributes(['id' => Yii::app()->user->id]);
+            $model->user_id = $user->id;
+            if ($model->validate()) {
+                if ($model->save()) {
+                    UserMessage::addFlash('Ваш профиль успешно создан');
+                    $this->redirect(Yii::app()->user->returnUrl);
+                } else {
+                    throw new CException('Не удалось создать профиль');
+                }
+            }
+        }
+        $this->render('profile', ['model' => $model]);
+    }
+
     public function actionForgotPassword()
     {
 
