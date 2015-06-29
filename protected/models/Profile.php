@@ -18,6 +18,17 @@
  */
 class Profile extends CActiveRecord
 {
+
+    public $acceptTerms = true;
+
+    const MAN = 1;
+    const WOMAN = 2;
+
+    public static $floorStatues = [
+        self::MAN => 'Мужской',
+        self::WOMAN => 'Женский',
+    ];
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -29,32 +40,40 @@ class Profile extends CActiveRecord
 	/**
 	 * @return array validation rules for model attributes.
 	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('user_id, user_name, date_born, city', 'required'),
-			array('floor', 'numerical', 'integerOnly'=>true),
-			array('user_id', 'length', 'max'=>10),
-			array('user_name, city, profile_foto', 'length', 'max'=>255),
-			array('about', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, user_name, floor, date_born, city, profile_foto, about', 'safe', 'on'=>'search'),
-		);
-	}
+    public function rules()
+    {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return [
+            ['user_id, user_name, date_born, floor', 'required'],
+            ['floor', 'numerical', 'integerOnly' => true],
+            ['user_id', 'length', 'max' => 10],
+            ['user_name, city, profile_foto', 'length', 'max' => 255],
+            ['about', 'safe'],
+            ['acceptTerms', 'validationAcceptTerms'],
+            // The following rule is used by search().
+            // @todo Please remove those attributes that should not be searched.
+            ['id, user_id, user_name, floor, date_born, city, profile_foto, about', 'safe', 'on' => 'search'],
+        ];
+    }
 
-	/**
-	 * @return array relational rules.
+    public function validationAcceptTerms($attribute)
+    {
+        if($this->$attribute != 1) {
+            $this->addError($attribute, 'Я ознакомлен и согласен  <a href="'.Yii::app()->createUrl('page/terms').'" target="_blank">с правилами использования</a> данного сервиса и мне больше 18 лет.');
+        }
+    }
+
+    /**
+     * @return array relational rules.
 	 */
 	public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		return array(
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-		);
+		return [
+			'user' => [self::BELONGS_TO, 'User', 'user_id'],
+		];
 	}
 
 	/**
@@ -62,16 +81,17 @@ class Profile extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
-		return array(
+		return [
 			'id' => 'ID',
 			'user_id' => 'User',
-			'user_name' => 'User Name',
-			'floor' => 'Floor',
-			'date_born' => 'Date Born',
-			'city' => 'City',
+			'user_name' => 'Имя',
+			'floor' => 'Пол',
+			'date_born' => 'dd.mm.yyyy',
+			'city' => 'Город',
 			'profile_foto' => 'Profile Foto',
 			'about' => 'About',
-		);
+            'acceptTerms'=> 'Я ознакомлен и согласен  <a href="'.Yii::app()->createUrl('page/terms').'" target="_blank">с правилами использования</a> данного сервиса и мне больше 18 лет.',
+		];
 	}
 
 	/**
@@ -101,10 +121,32 @@ class Profile extends CActiveRecord
 		$criteria->compare('profile_foto',$this->profile_foto,true);
 		$criteria->compare('about',$this->about,true);
 
-		return new CActiveDataProvider($this, array(
+		return new CActiveDataProvider($this, [
 			'criteria'=>$criteria,
-		));
+		]);
 	}
+
+    public static function getCity($ip_address)
+    {
+        if(Yii::app()->request->userHostAddress == '127.0.0.1'){
+            $ip_address = '109.171.22.55';
+        }
+        $url = 'http://ipgeobase.ru:7020/geo?ip=' . $ip_address;
+        $xml = new DOMDocument();
+        if ($xml->load($url)) {
+            $root = $xml->documentElement;
+            $result = [
+                'country' => $root->getElementsByTagName('country')->item(0)->nodeValue,
+                'region' => $root->getElementsByTagName('region')->item(0)->nodeValue,
+                'city' => $root->getElementsByTagName('city')->item(0)->nodeValue,
+                'district' => $root->getElementsByTagName('district')->item(0)->nodeValue];
+
+            return $result['city'];
+        } else {
+            return 'Новосибирск';
+        }
+
+    }
 
 	/**
 	 * Returns the static model of the specified AR class.

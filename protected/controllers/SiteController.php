@@ -158,13 +158,16 @@ class SiteController extends Controller
 
         if (isset($_POST['Profile'])) {
             $model->attributes = $_POST['Profile'];
+            $model->date_born = date('Y-m-d',strtotime($model->attributes['date_born']));
             /** @var $user User */
             $user = User::model()->findByAttributes(['id' => Yii::app()->user->id]);
             $model->user_id = $user->id;
+            $ip_address = Yii::app()->request->userHostAddress;
+            $model->city = Profile::getCity($ip_address);
             if ($model->validate()) {
                 if ($model->save()) {
                     UserMessage::addFlash('Ваш профиль успешно создан');
-                    $this->redirect(Yii::app()->user->returnUrl);
+                    $this->redirect('site/index');
                 } else {
                     throw new CException('Не удалось создать профиль');
                 }
