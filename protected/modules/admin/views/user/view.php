@@ -39,6 +39,12 @@ $this->widget('booster.widgets.TbDetailView', array(
         ],
         'id',
         [
+            'name' => 'profileStatus.user_name',
+            'value' => function ($data) {
+                return isset($data->profileStatus->user_name) ? $data->profileStatus->user_name : null;
+            }
+        ],
+        [
             'name'=>'email',
             'type'=>'raw',
             'value'=>function($data) {
@@ -59,6 +65,13 @@ $this->widget('booster.widgets.TbDetailView', array(
         ],
         'date_last',
         [
+            'label' => 'Дата рождения',
+            'value' => function ($data) {
+                return isset($data->profileStatus->date_born) ?
+                    date('d-m-Y', strtotime($data->profileStatus->date_born)) : null;
+            }
+        ],
+        [
             'name'  => 'ip_create',
             'type'  => 'raw',
             'value' => function () use ($model) {
@@ -78,6 +91,13 @@ $this->widget('booster.widgets.TbDetailView', array(
         [
             'name'  => 'role',
             'value' => Yii::app()->authManager->getAuthItem($model->role)->description,
+        ],
+
+        [
+            'name' => 'profileStatus.city',
+            'value' => function ($data) {
+                return isset($data->profileStatus->city) ? $data->profileStatus->city : null;
+            }
         ],
 
         [

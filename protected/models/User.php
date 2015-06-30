@@ -16,6 +16,7 @@
  * @property integer $banned
  * @property integer $security_lock
  * @property string $comment
+ * @property Profile $profileStatus
  */
 class User extends CActiveRecord
 {
@@ -103,6 +104,7 @@ class User extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return [
+            'profileStatus' => [self::HAS_ONE, 'Profile', 'user_id'],
         ];
     }
 

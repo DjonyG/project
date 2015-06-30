@@ -40,6 +40,14 @@ $('.search-form form').submit(function(){
     'filter' => $model,
     'columns' => [
         'id',
+        [
+            'name' => 'profileStatus.user_name',
+            'value' => function ($data) {
+                /* @var $data User */
+                return isset($data->profileStatus->user_name) ? $data->profileStatus->user_name : null;
+            },
+        ],
+
         'email',
         [
             'name' => 'date_created',
@@ -52,20 +60,20 @@ $('.search-form form').submit(function(){
             ],
         ],
         'date_last',
-        [
-            'name' => 'ip_create',
-            'value' => function ($data) {
-                /* @var $data User */
-                return long2ip($data->ip_create);
-            }
-        ],
-        [
-            'name' => 'ip_last',
-            'value' => function ($data) {
-                /* @var $data User */
-                return long2ip($data->ip_last);
-            }
-        ],
+//        [
+//            'name' => 'ip_create',
+//            'value' => function ($data) {
+//                /* @var $data User */
+//                return long2ip($data->ip_create);
+//            }
+//        ],
+//        [
+//            'name' => 'ip_last',
+//            'value' => function ($data) {
+//                /* @var $data User */
+//                return long2ip($data->ip_last);
+//            }
+//        ],
         [
             'name' => 'role',
             'filter' => CHtml::listData(Yii::app()->authManager->getRoles(), 'name', 'description'),
@@ -75,16 +83,23 @@ $('.search-form form').submit(function(){
                 return ($item) ? $item->description : '';
             }
         ],
+
         [
-            'name' => 'email_is_verified',
-            'header' => 'EV',
+            'name' => 'profileStatus.city',
             'value' => function ($data) {
-                return $data->email_is_verified ? '+' : '-';
-            },
-            'htmlOptions' => [
-                'style' => 'text-align: center;'
-            ],
+                return isset($data->profileStatus->city) ? $data->profileStatus->city : null;
+            }
         ],
+//        [
+//            'name' => 'email_is_verified',
+//            'header' => 'EV',
+//            'value' => function ($data) {
+//                return $data->email_is_verified ? '+' : '-';
+//            },
+//            'htmlOptions' => [
+//                'style' => 'text-align: center;'
+//            ],
+//        ],
         'banned',
         'comment',
 
