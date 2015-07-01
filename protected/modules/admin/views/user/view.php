@@ -10,10 +10,10 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'List User', 'url' => array('admin')),
-    array('label' => 'Create User', 'url' => array('create')),
-    array('label' => 'Update User', 'url' => array('update', 'id' => $model->id)),
-    array('label' => 'Delete User', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this account?')),
+    array('label' => 'Список', 'url' => array('admin')),
+    array('label' => 'Создать пользователя', 'url' => array('create')),
+    array('label' => 'Редактировать рользователя', 'url' => array('update', 'id' => $model->id)),
+    array('label' => 'Удалить пользователя', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this account?')),
 );
 ?>
 
@@ -33,7 +33,7 @@ $this->widget('booster.widgets.TbDetailView', array(
         ],
 
         [
-            'label' => 'Actions',
+            'label' => 'Действия',
             'type' => 'raw',
             'value' =>  Html::link('<i class="glyphicon glyphicon-pencil" title="Update"></i>', Yii::app()->createUrl("admin/user/update", ["id" => $model->id]))
         ],
@@ -45,10 +45,23 @@ $this->widget('booster.widgets.TbDetailView', array(
             }
         ],
         [
+            'label' => 'Пол',
+            'value' => function ($data) {
+                return isset($data->profileStatus->floor) ? Profile::$floorStatues[$data->profileStatus->floor] : null;
+            }
+        ],
+        [
             'name'=>'email',
             'type'=>'raw',
             'value'=>function($data) {
                 return Html::link($data->email, ['user/view', 'id'=>$data->id])   ;
+            }
+        ],
+        [
+            'label' => 'Дата рождения',
+            'value' => function ($data) {
+                return isset($data->profileStatus->date_born) ?
+                    date('d-m-Y', strtotime($data->profileStatus->date_born)) : null;
             }
         ],
         'comment',
@@ -64,13 +77,6 @@ $this->widget('booster.widgets.TbDetailView', array(
             },
         ],
         'date_last',
-        [
-            'label' => 'Дата рождения',
-            'value' => function ($data) {
-                return isset($data->profileStatus->date_born) ?
-                    date('d-m-Y', strtotime($data->profileStatus->date_born)) : null;
-            }
-        ],
         [
             'name'  => 'ip_create',
             'type'  => 'raw',

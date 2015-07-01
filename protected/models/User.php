@@ -115,17 +115,17 @@ class User extends CActiveRecord
     {
         return [
             'id' => 'ID',
-            'email' => 'Email',
-            'date_created' => 'Date Created',
-            'date_last' => 'Date Last',
-            'ip_create' => 'Ip Create',
-            'ip_last' => 'Ip Last',
-            'password' => 'Password',
-            'role' => 'Role',
-            'email_is_verified' => 'Email Is Verified',
-            'banned' => 'Banned',
-            'security_lock' => 'Security Lock',
-            'comment' => 'Comment',
+            'email' => 'Почта',
+            'date_created' => 'Дата создания',
+            'date_last' => 'Дата визита',
+            'ip_create' => 'Ip регистрации',
+            'ip_last' => 'Ip визита',
+            'password' => 'Пароль',
+            'role' => 'Роль',
+            'email_is_verified' => 'Почта проверена',
+            'banned' => 'Бан',
+            'security_lock' => 'Блокировка безопасности',
+            'comment' => 'Комментарии',
         ];
     }
 
